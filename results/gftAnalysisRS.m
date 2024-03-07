@@ -3,7 +3,6 @@ clear
 
 %% Set parameters
 
-windowSize = 8;
 cutoff1 = 0;
 cutoff2 = 0;
 option = 'MED'; % 'MED' for choosing the middle value and 'AVG' for averaging the window
@@ -45,73 +44,36 @@ for i = 1:length(subjects)
 
     %% LPF
 
-    start = 1;
-    last = windowSize;
-
-    LPFSimSub = [];
-    LPFSparSub = [];
-    LPFPearSub = [];
-    LPFSmoothSub = [];
-
-
     cutoff1 = 0;
     cutoff2 = floor(N/3);
 
-    while(last<=T)
-        LPFSimSub = [LPFSimSub, graphSpectralFilter(DataSub(:,start:last),SimSub(:,:,start),cutoff1,cutoff2,option)];
-        LPFSparSub = [LPFSparSub, graphSpectralFilter(DataSub(:,start:last),SparSub(:,:,start),cutoff1,cutoff2,option)];
-        LPFPearSub = [LPFPearSub, graphSpectralFilter(DataSub(:,start:last),PearSub(:,:,start),cutoff1,cutoff2,option)];
-        LPFSmoothSub = [LPFSmoothSub, graphSpectralFilter(DataSub(:,start:last),SmoothSub(:,:,start),cutoff1,cutoff2,option)];
-        start = start + 1;
-        last = last + 1;
-    end
+    LPFSimSub = graphSpectralFilter(DataSub,SimSub,cutoff1,cutoff2,option);
+    LPFSparSub = graphSpectralFilter(DataSub,SparSub,cutoff1,cutoff2,option);
+    LPFPearSub = graphSpectralFilter(DataSub,PearSub,cutoff1,cutoff2,option);
+    LPFSmoothSub = graphSpectralFilter(DataSub,SmoothSub,cutoff1,cutoff2,option);
 
     %% BPF
-
-    start = 1;
-    last = windowSize;
-
-    BPFSimSub = [];
-    BPFSparSub = [];
-    BPFPearSub = [];
-    BPFSmoothSub = [];
 
     cutoff1 = floor(N/3)+1;
     cutoff2 = 2*floor(N/3);
 
-    while(last<=T)
-        BPFSimSub = [BPFSimSub, graphSpectralFilter(DataSub(:,start:last),SimSub(:,:,start),cutoff1,cutoff2,option)];
-        BPFSparSub = [BPFSparSub, graphSpectralFilter(DataSub(:,start:last),SparSub(:,:,start),cutoff1,cutoff2,option)];
-        BPFPearSub = [BPFPearSub, graphSpectralFilter(DataSub(:,start:last),PearSub(:,:,start),cutoff1,cutoff2,option)];
-        BPFSmoothSub = [BPFSmoothSub, graphSpectralFilter(DataSub(:,start:last),SmoothSub(:,:,start),cutoff1,cutoff2,option)];
-        start = start + 1;
-        last = last + 1;
-    end
+    BPFSimSub = graphSpectralFilter(DataSub,SimSub,cutoff1,cutoff2,option);
+    BPFSparSub = graphSpectralFilter(DataSub,SparSub,cutoff1,cutoff2,option);
+    BPFPearSub = graphSpectralFilter(DataSub,PearSub,cutoff1,cutoff2,option);
+    BPFSmoothSub = graphSpectralFilter(DataSub,SmoothSub,cutoff1,cutoff2,option);
 
     %% HPF
-
-    start = 1;
-    last = windowSize;
-
-    HPFSimSub = [];
-    HPFSparSub = [];
-    HPFPearSub = [];
-    HPFSmoothSub = [];
 
     cutoff1 = 2*floor(N/3);
     cutoff2 = N;
 
-    while(last<=T)
-        HPFSimSub = [HPFSimSub, graphSpectralFilter(DataSub(:,start:last),SimSub(:,:,start),cutoff1,cutoff2,option)];
-        HPFSparSub = [HPFSparSub, graphSpectralFilter(DataSub(:,start:last),SparSub(:,:,start),cutoff1,cutoff2,option)];
-        HPFPearSub = [HPFPearSub, graphSpectralFilter(DataSub(:,start:last),PearSub(:,:,start),cutoff1,cutoff2,option)];
-        HPFSmoothSub = [HPFSmoothSub, graphSpectralFilter(DataSub(:,start:last),SmoothSub(:,:,start),cutoff1,cutoff2,option)];
-        start = start + 1;
-        last = last + 1;
-    end
+    HPFSimSub = graphSpectralFilter(DataSub,SimSub,cutoff1,cutoff2,option);
+    HPFSparSub = graphSpectralFilter(DataSub,SparSub,cutoff1,cutoff2,option);
+    HPFPearSub = graphSpectralFilter(DataSub,PearSub,cutoff1,cutoff2,option);
+    HPFSmoothSub = graphSpectralFilter(DataSub,SmoothSub,cutoff1,cutoff2,option);
 
     %% Save
-    
+
     s1 = "gft\";
     s2 = "_GFTFiltered_RS.mat";
     sub = s1 + subject + s2;
