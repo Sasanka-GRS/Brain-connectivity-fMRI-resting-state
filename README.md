@@ -1,2 +1,1 @@
-# Brain-connectivity-fMRI-resting-state
- 
+# Brain-Connectivity-fMRI
