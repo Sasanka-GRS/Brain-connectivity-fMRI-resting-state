@@ -18,14 +18,14 @@ addpath(".\functions");
 %% 
 
 s1 = "..\hpf\hpf_data\";
-s2 = "_data_voxel_N_hpf_M2.mat";
+s2 = "_data_voxel_N_hpf_RS.mat";
 sub = s1+subject+s2;
 
 dataIn = load(sub).data;
 data = clusterMine(dataIn,option1,option2);
 
 s1 = ".\clustered_data\";
-s2 = "_data_clustered_M2.mat";
+s2 = "_data_clustered_RS.mat";
 sub = s1+subject+s2;
 
 save(sub,"data");

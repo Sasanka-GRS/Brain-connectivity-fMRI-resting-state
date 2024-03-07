@@ -1,36 +1,21 @@
-function Graphs_W = pearWindowLearnWeighted(XData,Num,N)
+function Graphs_W = pearWindowLearnWeighted(XData,N)
 
-L = size(XData);
-L = L(2);
+%% Whole data
 
-Graphs_W = zeros(N,N,L-Num+1);
+X = XData;
 
-start = 1;
-last = Num;
+%% Setting weights as correlation coefficients
 
-while(last <= L)
+W = corrcoef(X');
 
-    %% Windowing data
+%% Set diagonals to zeros
 
-    X = XData(:,start:last);
+W = W - eye(N);
 
-    %% Setting weights as correlation coefficients
-    
-    W = corrcoef(X');
+W = abs(W);
 
-    %% Set diagonals to zeros
+W = normAdj(W);
 
-    W = W - eye(N);
-
-    W = abs(W);
-
-    W = normAdj(W);
-    
-    Graphs_W(:,:,start) = W;
-
-    start = start + 1;
-    last = last  + 1;
-
-end
+Graphs_W = W;
 
 end

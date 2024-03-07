@@ -1,24 +1,14 @@
-function Graphs_W = smoothWindowLearnWeighted(XData,Num,alpha,beta,iter,N)
+function Graphs_W = smoothWindowLearnWeighted(XData,alpha,beta,iter)
 
 % alpha increases smoothness of learnt data
 % beta increases sparsity of learnt graph
-L = size(XData);
-L = L(2);
 
-Graphs_W = [];
+%% Start with Z_est as original data
 
-for last = Num:L
+X = XData;
 
-    %% Start with Z_est as original data
+W = smoothWindowInside(iter,alpha,beta,X);
 
-    X = XData(:,last-Num+1:last);
-
-    W = smoothWindowInside(iter,alpha,beta,X);
-    
-    Graphs_W = [Graphs_W,W];
-
-end
-
-Graphs_W = reshape(Graphs_W,N,N,L-Num+1);
+Graphs_W = W;
 
 end

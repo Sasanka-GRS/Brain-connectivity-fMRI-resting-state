@@ -4,7 +4,7 @@ data = [];
 nodes = [];
 
 s1 = "..\data\";
-s2 = "Data_M2.mat";
+s2 = "Data_RS.mat";
 sub = s1+subject+s2;
 
 X = load(sub).extractedData;
@@ -21,7 +21,7 @@ for i = 1:R
 end
 
 s1 = ".\extracted_data\";
-s2 = "_data_voxel_M2.mat";
+s2 = "_data_voxel_RS.mat";
 sub = s1+subject+s2;
 
 data = Y;

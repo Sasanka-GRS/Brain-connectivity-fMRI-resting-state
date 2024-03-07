@@ -1,61 +1,50 @@
-function Graphs_W = sparWindowLearnWeighted(XData,Num,lambda,N)
+function Graphs_W = sparWindowLearnWeighted(XData,lambda,N)
 
-L = size(XData);
-L = L(2);
+%% Starting with NULL to append further
 
-Graphs_W = [];
+beta_final = [];
 
-for last = Num:L
+%% Repeating optimization solving N times
 
-    %% Starting with NULL to append further
+for j=1:N
 
-    beta_final = [];
+    X = XData;
 
-    %% Repeating optimization solving N times
+    yj = X(j,:);
+    X(j,:) = [];
+    Yn = X;
 
-    for j=1:N
+    cvx_begin
 
-        X = XData(:,last-Num+1:last);
+    variable beta_hat(N-1)
 
-        yj = X(j,:);
-        X(j,:) = [];
-        Yn = X;
+    minimize(norm((yj'-Yn'*beta_hat),2) + lambda*norm(beta_hat,1))
 
-        cvx_begin
+    subject to
+    beta_hat >= 0;
 
-        variable beta_hat(N-1)
+    cvx_end
 
-        minimize(norm((yj'-Yn'*beta_hat),2) + lambda*norm(beta_hat,1))
+    beta_hat = beta_hat';
 
-        subject to
-        beta_hat >= 0;
-
-        cvx_end
-
-        beta_hat = beta_hat';
-
-        beta_final = [beta_final;[beta_hat(1:N-1 < j),0,beta_hat(1:N-1 >= j)]];
-
-    end
-
-    %% Making it symmetric
-
-    W = zeros(N,N);
-
-    for i=1:N
-        for j=1:N
-            W(i,j) = sqrt(beta_final(i,j)*beta_final(j,i));
-        end
-    end
-
-    %% Normalize Adjacency
-
-    W = normAdj(W);
-
-    Graphs_W = [Graphs_W,W];
+    beta_final = [beta_final;[beta_hat(1:N-1 < j),0,beta_hat(1:N-1 >= j)]];
 
 end
 
-Graphs_W = reshape(Graphs_W,N,N,L-Num+1);
+%% Making it symmetric
+
+W = zeros(N,N);
+
+for i=1:N
+    for j=1:N
+        W(i,j) = sqrt(beta_final(i,j)*beta_final(j,i));
+    end
+end
+
+%% Normalize Adjacency
+
+W = normAdj(W);
+
+Graphs_W = W;
 
 end

@@ -1,42 +1,26 @@
-function Graphs_W = simWindowLearnWeighted(XData,Num,sigma,N)
+function Graphs_W = simWindowLearnWeighted(XData,sigma,N)
 
-L = size(XData);
-L = L(1);
+%% Total data
 
-Graphs_W = zeros(N,N,L-Num+1);
+x = XData;
 
-start = 1;
-last = Num;
+W = zeros(N,N);
 
-while(last <= L)
-    
-    %% Windowing data
+%% Setting weights as exponential distances
 
-    xN = XData(start:last,:);
-    x = xN;
-
-    W = zeros(N,N);
-
-    %% Setting weights as exponential distances
-
-    for i = 1:N
-        for j = 1:N
-            if(i==j)
-                continue;
-            end
-            W(i,j) = exp(-(norm(x(:,i)-x(:,j),2))/(2*(sigma^2)));
+for i = 1:N
+    for j = 1:N
+        if(i==j)
+            continue;
         end
+        W(i,j) = exp(-(norm(x(:,i)-x(:,j),2))/(2*(sigma^2)));
     end
-
-    %% Normalize Adjacency
-
-    W = normAdj(W);
-
-    Graphs_W(:,:,start) = W;
-    
-    start = start + 1;
-    last = last  + 1;
-
 end
+
+%% Normalize Adjacency
+
+W = normAdj(W);
+
+Graphs_W = W;
 
 end

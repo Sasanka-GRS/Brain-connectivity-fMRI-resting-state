@@ -15,12 +15,11 @@ extractLabels
 %% Run over all subjects
 
 % cd ..
-subjects = ["303","378","386","797","820","998","1092","1093","1171","1271","1352","1511","1603","1629"];
+subjects = ["303","378","386","820","1092","1093","1171","1352","1511","1629"];
 
 for i = 1:length(subjects) 
     subject = subjects(i);
     
-    %{
     %% Extraction
 
     cd extract_data\
@@ -59,11 +58,8 @@ for i = 1:length(subjects)
     combining(optionCombination,subject);
 
     cd ..
-    %}
     
     %% Graph Learning
-
-    windowSize = 8;
 
     sigma_similarity = 1; % For similarity based learning
 
@@ -73,21 +69,22 @@ for i = 1:length(subjects)
 
     lambda_sparsity = 2.5; % For sparsity based learning
 
-    %cd graph_learning\
-    %{   
+    cd graph_learning\
+    %{
     optionLearning = 'SI';
-    learn(windowSize,optionLearning,sigma_similarity,alpha_smoothness,beta_smoothness,iter_smoothness,lambda_sparsity,subject);
+    learn(optionLearning,sigma_similarity,alpha_smoothness,beta_smoothness,iter_smoothness,lambda_sparsity,subject);
     
     optionLearning = 'PE';
-    learn(windowSize,optionLearning,sigma_similarity,alpha_smoothness,beta_smoothness,iter_smoothness,lambda_sparsity,subject);
-    
+    learn(optionLearning,sigma_similarity,alpha_smoothness,beta_smoothness,iter_smoothness,lambda_sparsity,subject);
+    %}
     optionLearning = 'SP';
-    learn(windowSize,optionLearning,sigma_similarity,alpha_smoothness,beta_smoothness,iter_smoothness,lambda_sparsity,subject);
+    learn(optionLearning,sigma_similarity,alpha_smoothness,beta_smoothness,iter_smoothness,lambda_sparsity,subject);
     
     optionLearning = 'SM';
-    learn(windowSize,optionLearning,sigma_similarity,alpha_smoothness,beta_smoothness,iter_smoothness,lambda_sparsity,subject);
-    %}
+    learn(optionLearning,sigma_similarity,alpha_smoothness,beta_smoothness,iter_smoothness,lambda_sparsity,subject);
     
+    cd ..
+
     cd normalize_graphs\
     normalizeGraphs(subject);
     
