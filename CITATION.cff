@@ -1,0 +1,9 @@
+cff-version: 1.2.0
+message: "If you use this software, please cite it as below."
+authors:
+- family-names: "Sasanka"
+  given-names: "GRS"
+title: "Brain-connectivity-fMRI-resting-state"
+version: 1.0.0
+date-released: 2024-03-14
+url: "https://github.com/Sasanka-GRS/Brain-connectivity-fMRI-resting-state"
