@@ -99,18 +99,18 @@ W_allsub_HIGH = W;
 
 figure()
 
-subplot(1,3,1)
+%subplot(1,3,1)
 plotting(Layout(:,1:2),W_allsub_alltime,topAllTime,Labels);
-title('Average of all time','FontSize',25);
-set(gca,'XColor', 'none','YColor','none')
-subplot(1,3,2)
+%title('Average of all time','FontSize',25);
+%set(gca,'XColor', 'none','YColor','none')
+%subplot(1,3,2)
 plotting(Layout(:,1:2),W_allsub_LOW,topLOW,Labels);
-title('Empathy LOW','FontSize',25);
+%title('Empathy LOW','FontSize',25);
+%set(gca,'XColor', 'none','YColor','none')
+%subplot(1,3,3)
+%plotting(Layout(:,1:2),W_allsub_HIGH,topHIGH,Labels);
+%title('Empathy HIGH','FontSize',25);
 set(gca,'XColor', 'none','YColor','none')
-subplot(1,3,3)
-plotting(Layout(:,1:2),W_allsub_HIGH,topHIGH,Labels);
-title('Empathy HIGH','FontSize',25);
-set(gca,'XColor', 'none','YColor','none')
-tightfig
+%tightfig
 
 sgtitle('Sparsity','FontSize',25);

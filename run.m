@@ -70,7 +70,7 @@ for i = 1:length(subjects)
     lambda_sparsity = 2.5; % For sparsity based learning
 
     cd graph_learning\
-    %{
+    
     optionLearning = 'SI';
     learn(optionLearning,sigma_similarity,alpha_smoothness,beta_smoothness,iter_smoothness,lambda_sparsity,subject);
     
@@ -82,7 +82,7 @@ for i = 1:length(subjects)
     
     optionLearning = 'SM';
     learn(optionLearning,sigma_similarity,alpha_smoothness,beta_smoothness,iter_smoothness,lambda_sparsity,subject);
-    %}
+    
     cd ..
 
     cd normalize_graphs\
