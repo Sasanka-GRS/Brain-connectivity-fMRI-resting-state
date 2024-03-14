@@ -52,7 +52,7 @@ Please follow the installation guidelines [here](https://cvxr.com/cvx/).
 
 ## Process flow
 
-Create a folder named 'data' in the parent directory ([here](/pipeline_windowed/) or []) and place the data (subject_data.mat) in it. If the data is in the correct format, and with the right dependency installations, the pipeline should run without errors. The data is first extracted in the [extract_data](/pipeline_windowed/extract_data/) folder, then normalized in [normalize_data](/pipeline_windowed/normalize_data/), then high-pass filtered in [hpf](/pipeline_windowed/hpf/), then clustered in [clustering](/pipeline_windowed/clustering/), and finally combined to regions in [combination](/pipeline_windowed/clustering/). The data at each stage in the pipeline is stored in the respective folders. Finally, the [graph learning module](/pipeline_windowed/graph_learning/) performs graph learning over the region-level time-series. Similar processing is done for the non-windowed graph learning also.
+Create a folder named 'data' in the parent directory ([here](/pipeline_windowed/) or []) and place the data (subject_data.mat) in it. If the data is in the correct format, and with the right dependency installations, the pipeline should run without errors. The data is first extracted in the [extract_data](/pipeline_windowed/extract_data/) folder, then normalized in [normalize_data](/pipeline_windowed/normalize_data/), then high-pass filtered in [hpf](/pipeline_windowed/hpf/), then clustered in [clustering](/pipeline_windowed/clustering/), and finally combined to regions in [combination](/pipeline_windowed/clustering/). The data at each stage in the pipeline is stored in the respective folders. Finally, the [graph learning module](/pipeline_windowed/graph_learning/) performs graph learning over the region-level time-series, and finally, the graphs are normalized for the weights to lie between 0 and 1, in the [normalize](/pipeline_windowed/normalize_graphs/) graphs module. Similar processing is done for the non-windowed graph learning also.
 
 ## Running the pipeline
 
@@ -64,13 +64,13 @@ To run the pipeline, make sure the data is in the right format and right locatio
 
 The results use the graphs generated in the graph learning module, that are saved in the [graph_data](/pipeline_windowed/graph_learning/graph_data/) folder. Some of them require an emotion scale that is given by the participants. The results include
 
-1. Edge weight vs time ([plotTimeSeriesWeights.m](/pipeline/results/plotTimeSeriesWeights.m))
-2. Comparison of similarity of graphs across methods ([compareInstant_303.m](/pipeline/results/compareInstant_303.m))
-3. Graph based clustering ([graphClustering.m](/pipeline/results/graphClustering.m))
-4. Plotting and visualizing the obtained graphs ([graphPlot.ipynb](/pipeline/results/graphPlot.ipynb)) (This uses the nilearn brain library for plotting)
-5. Frequency of edges ([nodeEdgeFrequency.m](/pipeline/results/nodeEdgeFrequency.m))
-6. Time series vs Scale ([timeSeriesVsScale.m](/pipeline/results/timeSeriesVsScale.m))
-7. Edge weight vs Scale ([weightVsScale.m](/pipeline/results/weightVsScale.m))
+1. Edge weight vs time ([plotTimeSeriesWeights.m](/pipeline_windowed/results/plotTimeSeriesWeights.m))
+2. Comparison of similarity of graphs across methods ([compareInstant_303.m](/pipeline_windowed/results/compareInstant_303.m))
+3. Graph based clustering ([graphClustering.m](/pipeline_windowed/results/graphClustering.m))
+4. Plotting and visualizing the obtained graphs ([graphPlot.ipynb](/pipeline_windowed/results/graphPlot.ipynb)) (This uses the nilearn brain library for plotting)
+5. Frequency of edges ([nodeEdgeFrequency.m](/pipeline_windowed/results/nodeEdgeFrequency.m))
+6. Time series vs Scale ([timeSeriesVsScale.m](/pipeline_windowed/results/timeSeriesVsScale.m))
+7. Edge weight vs Scale ([weightVsScale.m](/pipeline_windowed/results/weightVsScale.m))
 
 ## Legend
 
